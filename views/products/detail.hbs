@@ -1,16 +1,29 @@
-<div class="mt-4">
-    <div class="row">
-        <div class="col-lg-3">
-            <button>MUA NGAY</button>
-            <ul>
-                <li>{{product.price}}</li>
-            </ul>
-        </div>
+<div class="row d-flex justify-content-center ">
+    <div class="col-md-10 ">
+        <div class="card bg-secondary bg-gradient">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="images p-3">
+                        <div class="text-center p-4"> <img id="main-image" src="{{product.image}}"
+                                alt="{{product.name}}" width="250" /> </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="product p-4">
 
-        <div class="col-lg-9">
-            <h2>{{product.name}}</h2>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/{{product.video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <p>{{product.description}}</p>
+                        <div class="mt-4 mb-3 "> <span>APPLE</span>
+                            <h3 class="text-uppercase text-light " >{{product.name}}</h3>
+                            <div >{{product.content}}</div>
+                        </div>
+                        <h3 class="text-light">{{product.description}}</h3>
+                        <div class="cart mt-4 align-items-center">
+                            <h5 class="act-price text-light">{{product.price}} VND</h5>
+                            <button class="btn btn-danger text-uppercase mr-2 px-4">Thêm vào giỏ hàng</button>
+                            <i class="fa fa-heart text-muted"></i> <i class="fa fa-share-alt text-muted"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

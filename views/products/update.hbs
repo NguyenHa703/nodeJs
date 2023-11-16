@@ -1,0 +1,62 @@
+<div class="mt-4">
+    <h3>Update Product</h3>
+
+    <table class="table mt-4">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">description</th>
+                <th scope="col">content</th>
+                <th scope="col"> price</th>
+                <th> </th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each products}}
+            <tr>
+                <th scope="row">{{sum @index 1}}</th>
+                <td>{{this.name}}</td>
+                <td>{{this.description}}</td>
+                <td>{{this.content}}</td>
+                <td>{{this.price}}</td>
+                <td>
+                    <a href="/products/{{this._id}}/edit" ><button>Sửa</button></a>
+                    <a  ><button data-bs-toggle="modal" data-id="{{this._id}}" data-bs-target="#dlt_product">Xóa</button></a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+{{!-- confirm delete --}}
+<div class="modal" id="dlt_product" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn chắc chắn muốn xóa ???</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        <button type="button" class="btn btn-primary">Xóa bỏ</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded',function(){
+        $('#dlt_product').on('show.bs.modal',function(event){
+        var button = $(event.relatedTarget)
+        var id = button.data('id')
+        console.log(id)
+    })
+    })
+    
+
+</script>
