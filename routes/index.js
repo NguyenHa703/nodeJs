@@ -1,7 +1,13 @@
-const products = require('./products');
-function routes(app) {
+const products = require('./products')
+const users = require('./users')
 
-    app.use('/products',products)
+
+
+function routes(app) {
+    app.use('/users', users)
+    app.use('/products', products)
+  
 }
 
 module.exports = routes
+

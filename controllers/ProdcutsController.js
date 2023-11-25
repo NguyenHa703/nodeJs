@@ -6,22 +6,37 @@ const {
 
 class ProductsController {
   //[GET]/products
-  async getAllProducts(req, res) {
-    try{
+  // async getAllProducts(req, res) {
+  //   try {
 
-      const product = await Product.find()
-      // res.json(product)
-      res.render("products/list", {
-        product: mutipleMongooseToObject(product),
-      });
-    }catch(error){
-      res.status(400).json({error:'ERROR!!'})
+  //     const product = await Product.find()
+  //     res.json(product);
+      // res.render("products/list", {
+      //   products: mutipleMongooseToObject(product),
+      // });
+  //   } catch (error) {
+  //     res.status(400).json({ error: 'ERROR!!' })
+  //   }
+  // }
+
+  //[GET] products/all
+  async getProductsList(req, res) {
+    try {
+      const products = await Product.find();
+      res.json(products);
+      // res.render("products/list", {
+      //   products: mutipleMongooseToObject(products),
+      // });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
     }
   }
+
   // [GET] /products/:id
   async getProductDetail(req, res) {
     try {
-      const product = await Product.findById(req.params.slug);
+      const product = await Product.findById(req.params.id);
       res.json(product);
       // res.render("products/detail", {
       //   product: mongooseToObject(product),
@@ -70,10 +85,10 @@ class ProductsController {
   async editProduct(req, res) {
     try {
       const product = await Product.findById(req.params.id) //product.findById() => products (id == idT) ==> GET detail sản phẩm
-      // res.json(product);
-      res.render("products/edit", {
-        product: mongooseToObject(product),
-      });
+      res.json(product);
+      // res.render("products/edit", {
+      //   product: mongooseToObject(product),
+      // });
     } catch (error) {
       res.status(400).json({ error: "ERROR!!!" });
     }
@@ -83,7 +98,8 @@ class ProductsController {
   async update(req, res) {
     // res.json(req.body)
     try {
-      const product = await Product.updateOne({ _id: req.params.id }, req.body)
+      const product = await Product.updateOne({ slug: req.params.slug }, req.body)
+      // res.redirect('update')
       // console.log(({_id:req.params.id},req.body));
       res.status(200).json({ message: 'update ok' });
     } catch (error) {
@@ -93,21 +109,22 @@ class ProductsController {
   }
 
 
-  //[DELETE] products/:id
+  // [DELETE] products/:id
   // destroy(req,res){
   //     Product.deleteOne({_id:req.params.id})
   //     .then(()=>res.redirect('back'))
   //     .catch(error)
   // }
-  // async deleteProduct(req, res) {
-  //   try {
-  //     const product = await Product.deleteOne({ _id: req.params.id });
-  //     res.status(200).json({ message: 'ok' })
-  //   }
-  //   catch (error) {
-  //     res.status(400).json({ error: 'ERROR!!!' });
-  //   }
-  // }
+  async deleteProduct(req, res) {
+    try {
+      const product = await Product.deleteOne({ slug: req.params.slug });
+      // console.log({ _id: req.params.id });
+      res.status(200).json({ message: 'ok' })
+    }
+    catch (error) {
+      res.status(400).json({ error: 'ERROR!!!' });
+    }
+  }
 
 
 }
